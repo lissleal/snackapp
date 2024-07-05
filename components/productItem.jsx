@@ -1,12 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import theme from "../config/theme";
 
-export const Card = () => {
+export const ProductItem = ({ name, category, price, description }) => {
   const onPress = () => {
     console.log("Botón presionado");
   };
   return (
-    <View style={styles.card}>
+    <Pressable style={styles.productItem}>
       <Image
         style={styles.imagen}
         source={{
@@ -14,24 +15,28 @@ export const Card = () => {
         }}
       />
       <View style={styles.textContainer}>
-        <Text style={styles.textProduct}>Wipala Snacks almendra chocolate</Text>
-        <Text style={styles.textDescription}>Barra Proteinas</Text>
-        <Text style={styles.textPrice}>1300 $</Text>
+        <Text style={styles.textProduct}>{name}</Text>
+        <Text style={styles.textDescription}>{description}</Text>
+        <Text style={styles.textPrice}>{price}</Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
-  card: {
+  productItem: {
     flexDirection: "row",
     alignContent: "center",
     alignItems: "center",
     height: 120,
     width: 350,
-    backgroundColor: "#D3B398",
+    borderWidth: 1,
+    borderColor: "#D3B398",
+    borderRadius: 20,
+    padding: 10,
   },
   textContainer: {
+    flex: 2,
     alignItems: "flex-start",
     justifyContent: "center",
     padding: 10,
@@ -46,5 +51,6 @@ const styles = StyleSheet.create({
   imagen: {
     height: 110,
     width: 110,
+    flex: 1,
   },
 });

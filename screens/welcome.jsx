@@ -21,7 +21,7 @@ export const Welcome = () => {
   };
 
   return (
-    <SafeAreaView>
+    <View style={styles.safeArea}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Snackeando</Text>
       </View>
@@ -45,17 +45,23 @@ export const Welcome = () => {
           modalVisible={modalVisible}
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#D3B398",
+  },
   container: {
+    flex: 4,
     alignItems: "center",
+    margin: 10,
 
     justifyContent: "space around",
     padding: 24,
-    backgroundColor: "#D3B398",
     gap: 20,
   },
 
@@ -63,8 +69,12 @@ const styles = StyleSheet.create({
     fontSize: 48,
   },
   titleContainer: {
-    borderRadius: 50, //arreglar
+    flex: 1,
+    borderBottomRightRadius: 50,
+    borderBottomLeftRadius: 50,
     borderBlockColor: "black",
+    alignItems: "center",
+    justifyContent: "center",
     padding: 24,
     backgroundColor: "white",
     gap: 20,
@@ -75,7 +85,7 @@ const styles = StyleSheet.create({
     color: "#38434D",
   },
   imagen: {
-    width: 320,
-    height: 320,
+    width: 300,
+    height: 300,
   },
 });

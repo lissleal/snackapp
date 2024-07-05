@@ -4,7 +4,7 @@ import { Header } from "../components/header";
 import { ButtonSlide } from "../components/buttonSlide.jsx";
 import { Arrow } from "../icons/arrow.jsx";
 import { SafeAreaView } from "react-native";
-import { Card } from "../components/card";
+import { ProductItem } from "../components/productItem";
 
 export const Cart = () => {
   const [button, setButton] = useState(false);
@@ -18,7 +18,7 @@ export const Cart = () => {
       <View style={styles.container}>
         <Header label={"Todos los productos"} />
         <Text>Cart</Text>
-        <Card></Card>
+        <ProductItem></ProductItem>
         <View style={styles.totalContainer}>
           <Text>Total a Pagar</Text>
           <Text>xxxxx $</Text>

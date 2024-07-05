@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "name": "Papas Fritas de Batata",
+    "description": "Crujientes papas fritas de batata horneadas, sin conservantes.",
+    "price": "$2.50",
+    "category": "Papas Fritas"
+  },
+  {
+    "id": 2,
+    "name": "Galletas de Avena y Miel",
+    "description": "Deliciosas galletas de avena endulzadas con miel natural.",
+    "price": "$3.00",
+    "category": "Galletas"
+  },
+  {
+    "id": 3,
+    "name": "Cereales Integrales con Frutas",
+    "description": "Mezcla de cereales integrales con trozos de frutas deshidratadas.",
+    "price": "$4.50",
+    "category": "Cereales"
+  },
+  {
+    "id": 4,
+    "name": "Mix de Frutos Secos",
+    "description": "Variedad de frutos secos sin sal añadida.",
+    "price": "$5.00",
+    "category": "Frutos Secos"
+  },
+  {
+    "id": 5,
+    "name": "Barra de Cereal de Chocolate",
+    "description": "Barra de cereal con chocolate negro, sin azúcares añadidos.",
+    "price": "$1.80",
+    "category": "Barras de Cereal"
+  },
+  {
+    "id": 6,
+    "name": "Yogurt Natural con Frutas",
+    "description": "Yogurt natural sin azúcar con trozos de frutas frescas.",
+    "price": "$2.20",
+    "category": "Yogurt"
+  },
+  {
+    "id": 7,
+    "name": "Agua de Coco",
+    "description": "Agua de coco natural sin azúcares añadidos.",
+    "price": "$1.50",
+    "category": "Bebidas"
+  },
+  {
+    "id": 8,
+    "name": "Barra de Proteínas de Vainilla",
+    "description": "Barra de proteínas sabor vainilla, ideal para recuperar energía.",
+    "price": "$2.80",
+    "category": "Barra de Proteinas"
+  },
+  {
+    "id": 9,
+    "name": "Palitos de Verduras Deshidratadas",
+    "description": "Palitos crujientes de zanahoria y apio deshidratados.",
+    "price": "$3.50",
+    "category": "Otros"
+  },
+  {
+    "id": 10,
+    "name": "Papas Fritas de Yuca",
+    "description": "Papas fritas de yuca horneadas, sin grasas trans.",
+    "price": "$2.75",
+    "category": "Papas Fritas"
+  },
+  {
+    "id": 11,
+    "name": "Galletas Integrales de Almendra",
+    "description": "Galletas integrales con almendras y sin gluten.",
+    "price": "$3.20",
+    "category": "Galletas"
+  },
+  {
+    "id": 12,
+    "name": "Cereales de Amaranto y Miel",
+    "description": "Cereales de amaranto endulzados con miel orgánica.",
+    "price": "$4.00",
+    "category": "Cereales"
+  },
+  {
+    "id": 13,
+    "name": "Almendras Tostadas sin Sal",
+    "description": "Almendras tostadas sin sal, ricas en proteínas.",
+    "price": "$5.20",
+    "category": "Frutos Secos"
+  },
+  {
+    "id": 14,
+    "name": "Barra de Cereal de Frutos Rojos",
+    "description": "Barra de cereal con mezcla de frutos rojos y semillas.",
+    "price": "$1.90",
+    "category": "Barras de Cereal"
+  },
+  {
+    "id": 15,
+    "name": "Yogurt Griego sin Azúcar",
+    "description": "Yogurt griego natural, sin azúcares añadidos.",
+    "price": "$2.50",
+    "category": "Yogurt"
+  },
+  {
+    "id": 16,
+    "name": "Té Verde con Menta",
+    "description": "Refrescante té verde con menta, sin cafeína.",
+    "price": "$1.75",
+    "category": "Bebidas"
+  },
+  {
+    "id": 17,
+    "name": "Barra de Proteínas de Cacao",
+    "description": "Barra de proteínas con cacao puro y sin gluten.",
+    "price": "$2.90",
+    "category": "Barra de Proteinas"
+  },
+  {
+    "id": 18,
+    "name": "Chips de Manzana Deshidratada",
+    "description": "Rodajas de manzana deshidratada, sin azúcar añadido.",
+    "price": "$3.00",
+    "category": "Otros"
+  },
+  {
+    "id": 19,
+    "name": "Papas Fritas de Plátano",
+    "description": "Papas fritas de plátano horneadas, ideales para picar.",
+    "price": "$2.60",
+    "category": "Papas Fritas"
+  },
+  {
+    "id": 20,
+    "name": "Galletas de Coco y Avena",
+    "description": "Galletas crujientes de coco y avena, sin gluten.",
+    "price": "$3.40",
+    "category": "Galletas"
+  }
+]
