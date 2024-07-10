@@ -14,9 +14,10 @@ export const SearchInput = (props) => {
 const styles = StyleSheet.create({
   headerSearch: {
     flexDirection: "row",
-    gap: 20,
-    padding: 5,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
     alignItems: "center",
+    justifyContent: "space-between",
     borderBlockColor: "#D3B398",
     borderWidth: 2,
     borderRadius: 50,

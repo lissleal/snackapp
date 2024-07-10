@@ -1,76 +1,132 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, SafeAreaView, FlatList } from "react-native";
-import { Categories } from "../components/categories";
-import { Header } from "../components/header";
+import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  View,
+  StyleSheet,
+  Text,
+  FlatList,
+  useWindowDimensions,
+} from "react-native";
 import { ProductItem } from "../components/productItem";
 import { SearchInput } from "../components/searchInput";
-
 import products from "../data/products.json";
+import { useNavigation } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
+import { ROUTE } from "../navigation/routes";
 
 export const ItemListCategories = () => {
+  const { params } = useRoute();
+  const { navigate, setOptions } = useNavigation();
   const [textToSearch, setTextToSearch] = useState("");
   const [productsFiltered, setProductsFiltered] = useState(products);
 
-  useEffect(() => {
-    const filtered = products.filter((product) =>
+  const { width, height } = useWindowDimensions();
+  const styles = createStyles(width, height);
+
+  const handleSearch = (textToSearch) => {
+    if (params.category) {
+      const productsFiltered = products.filter(
+        (product) =>
+          product.name
+            .toLowerCase()
+            .includes(textToSearch.toLowerCase().trim()) &&
+          product.category === params.category
+      );
+      setProductsFiltered(productsFiltered);
+      return;
+    }
+    setTextToSearch(textToSearch);
+    const productsFiltered = products.filter((product) =>
       product.name.toLowerCase().includes(textToSearch.toLowerCase().trim())
     );
-    setProductsFiltered(filtered);
-  }, [textToSearch]);
+    setProductsFiltered(productsFiltered);
+  };
 
+  useEffect(() => {
+    if (params.category) {
+      const filteredByCategory = products.filter(
+        (product) => product.category === params.category
+      );
+      setProductsFiltered(filteredByCategory);
+    } else {
+      setProductsFiltered(products);
+    }
+  }, [products, params.category]);
+
+  useEffect(() => {
+    const category = params.category;
+    setOptions({ title: category });
+  }, [params.category]);
+
+  const navigateToItemDetails = (productId) =>
+    navigate(ROUTE.PRODUCTO, { productId });
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.itemListCategories}>
       <View style={styles.header}>
-        <Header label="Volver" />
         <SearchInput
-          onChangeText={setTextToSearch}
+          onChangeText={handleSearch}
           value={textToSearch}
-          placeholder="   Busca tu Snack favorito"
+          placeholder="Busca tus Snacks favoritos"
         />
       </View>
+      <View style={styles.categories}>
+        {productsFiltered.length === 0 ? (
+          <Text style={styles.error}>
+            No se encontraron productos con el texto "{textToSearch}"
+          </Text>
+        ) : null}
+        {/* <Text style={styles.text}>Categorias Favoritas</Text> */}
+        {/* <Categories /> */}
+      </View>
 
-      <Text style={styles.text}>Categoría Actual</Text>
-      {/* <Categories /> */}
-      <FlatList
-        data={productsFiltered}
-        contentContainerStyle={styles.list}
-        renderItem={({ item }) => <ProductItem {...item}></ProductItem>}
-        key={(item) => item.id}
-      ></FlatList>
-
-      {productsFiltered.length === 0 ? (
-        <Text style={styles.error}>
-          {" "}
-          No se encontraron productos con el texto "{textToSearch}"
-        </Text>
-      ) : null}
-    </View>
+      <View style={styles.products}>
+        <FlatList
+          contentContainerStyle={styles.listProducts}
+          data={productsFiltered}
+          key={(item) => item.id}
+          renderItem={({ item }) => (
+            <ProductItem
+              {...item}
+              onPress={() => navigateToItemDetails(item.id)}
+            />
+          )}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    alignItems: "center",
-    gap: 20,
-    padding: 20,
-  },
+const createStyles = (width, height) =>
+  StyleSheet.create({
+    itemListCategories: {
+      flex: 1,
+      padding: 21,
+      width: width,
+      height: height,
+      gap: 10,
+    },
+    header: {
+      flex: 1,
+    },
+    categories: {
+      flex: 2,
+      justifyContent: "center",
+    },
+    products: {
+      flex: 10,
+    },
 
-  text: {
-    fontSize: 20,
-    marginBottom: 10,
-  },
-  list: {
-    gap: 10,
-  },
-  header: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: 10,
-  },
-  error: {
-    color: "red",
-    fontSize: 20,
-  },
-});
+    text: {
+      fontSize: 28,
+      fontWeight: "bold",
+      fontFamily: "Inter",
+    },
+    listProducts: {
+      gap: 10,
+    },
+    error: {
+      color: "red",
+      fontSize: 20,
+      fontFamily: "Inter",
+    },
+  });

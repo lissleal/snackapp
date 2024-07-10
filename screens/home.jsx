@@ -1,35 +1,38 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
-import { Header } from "../components/header";
-import { Options } from "../icons/options";
-// import { Categories } from '../components/categories';
-// import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Categories } from "../components/categories";
 
 export const Home = () => {
-  // const navigation = useNavigation();
-  // const handlePress = () => {
-  //   navigation.navigate('AllProducts');
-  // };
-
   return (
-    <View style={styles.safeArea}>
-      <Header icon={Options} label="Explora nuestras categorías" />
+    <SafeAreaView style={styles.safeArea}>
       <Text style={styles.text}>Bienvenido a tu app de Snacks Saludables </Text>
-      {/* <Categories onPress={handlePress} /> */}
-    </View>
+      <Image
+        source={require("../assets/images/logosnacks.png")}
+        style={styles.imagen}
+      />
+
+      <Categories />
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   safeArea: {
-    flex: 1,
+    // flex: 1,
     alignItems: "center",
     margin: 16,
   },
   text: {
     marginTop: 20,
-    fontSize: 15,
+    fontSize: 30,
     fontWeight: "500",
     marginHorizontal: 16,
+    fontFamily: "Inter",
+  },
+  imagen: {
+    width: 500,
+    height: 200,
+    margin: 20,
   },
 });

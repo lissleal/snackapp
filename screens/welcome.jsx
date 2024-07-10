@@ -1,27 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ModalConfirmacion } from "../components/modalConfirmacion.jsx";
 import { ButtonSlide } from "../components/buttonSlide.jsx";
 import { Arrow2 } from "../icons/arrow2.jsx";
+import { useNavigation } from "@react-navigation/native";
+import { ROUTE } from "../navigation/routes.js";
 
 export const Welcome = () => {
-  const [button, setButton] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation();
 
   const onPress = () => {
-    console.log("Botón presionado");
-    setModalVisible(true);
-    setButton(true);
-  };
-
-  const onHandleModal = () => {
-    setModalVisible((modalVisible) => !modalVisible);
-    console.log("Modal cerrado");
+    navigation.navigate(ROUTE.INICIO);
   };
 
   return (
-    <View style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Snackeando</Text>
       </View>
@@ -40,12 +33,8 @@ export const Welcome = () => {
         <ButtonSlide onPress={onPress} icon={Arrow2}>
           Ingresar
         </ButtonSlide>
-        <ModalConfirmacion
-          onHandleModal={onHandleModal}
-          modalVisible={modalVisible}
-        />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -55,37 +44,38 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#D3B398",
   },
-  container: {
-    flex: 4,
-    alignItems: "center",
-    margin: 10,
-
-    justifyContent: "space around",
-    padding: 24,
-    gap: 20,
-  },
-
-  title: {
-    fontSize: 48,
-  },
   titleContainer: {
     flex: 1,
     borderBottomRightRadius: 50,
     borderBottomLeftRadius: 50,
-    borderBlockColor: "black",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    padding: 14,
+    backgroundColor: "white",
+  },
+  container: {
+    flex: 5,
     alignItems: "center",
     justifyContent: "center",
+    margin: 10,
     padding: 24,
-    backgroundColor: "white",
-    gap: 20,
+    gap: 30,
+  },
+  title: {
+    fontSize: 40,
+    fontFamily: "Inter",
+    color: "#D3B398",
+    fontStyle: "italic",
   },
   subtitle: {
-    padding: 15,
     fontSize: 20,
     color: "#38434D",
+    fontFamily: "Inter",
   },
   imagen: {
-    width: 300,
-    height: 300,
+    minHeight: 90,
+    minWidth: 90,
+    height: "50%",
+    width: "70%",
   },
 });

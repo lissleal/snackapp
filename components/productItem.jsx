@@ -1,13 +1,19 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Pressable,
+  useWindowDimensions,
+} from "react-native";
 import theme from "../config/theme";
 
-export const ProductItem = ({ name, category, price, description }) => {
-  const onPress = () => {
-    console.log("Botón presionado");
-  };
+export const ProductItem = ({ name, price, description, onPress }) => {
+  const { width, height } = useWindowDimensions();
+  const styles = createStyles(width, height);
   return (
-    <Pressable style={styles.productItem}>
+    <Pressable style={styles.productItem} onPress={onPress}>
       <Image
         style={styles.imagen}
         source={{
@@ -23,34 +29,36 @@ export const ProductItem = ({ name, category, price, description }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  productItem: {
-    flexDirection: "row",
-    alignContent: "center",
-    alignItems: "center",
-    height: 120,
-    width: 350,
-    borderWidth: 1,
-    borderColor: "#D3B398",
-    borderRadius: 20,
-    padding: 10,
-  },
-  textContainer: {
-    flex: 2,
-    alignItems: "flex-start",
-    justifyContent: "center",
-    padding: 10,
-  },
-  textProduct: {
-    fontSize: 15,
-    fontWeight: "bold",
-  },
-  textDescription: {
-    fontSize: 12,
-  },
-  imagen: {
-    height: 110,
-    width: 110,
-    flex: 1,
-  },
-});
+const createStyles = (width) =>
+  StyleSheet.create({
+    productItem: {
+      flexDirection: "row",
+      alignContent: "center",
+      alignItems: "center",
+      height: 120,
+      borderWidth: 1,
+      borderColor: "#D3B398",
+      borderRadius: 20,
+      padding: 10,
+    },
+    textContainer: {
+      flex: 2,
+      alignItems: "flex-start",
+      justifyContent: "center",
+      padding: 10,
+    },
+    textProduct: {
+      fontSize: 15,
+      fontWeight: "bold",
+      fontFamily: "Inter",
+    },
+    textDescription: {
+      fontSize: 12,
+      fontFamily: "Inter",
+    },
+    imagen: {
+      height: 110,
+      width: 110,
+      flex: 1,
+    },
+  });

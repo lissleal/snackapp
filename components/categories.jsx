@@ -2,23 +2,37 @@ import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import data from "../data/categories.json";
 import { CategoryItem } from "./categoryItem.jsx";
+import { useNavigation } from "@react-navigation/native";
+import { ROUTE } from "../navigation/routes";
 
 export const Categories = () => {
+  const { navigate } = useNavigation();
+  // const handlePress = (category) => {
+  //   navigate(ROUTE.PRODUCTOS, { category });
+  // };
+
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={data}
-        horizontal
-        contentContainerStyle={styles.list}
-        renderItem={({ item }) => <CategoryItem nombre={item} />}
-      />
-    </View>
+    <FlatList
+      contentContainerStyle={styles.list}
+      data={data}
+      horizontal
+      renderItem={({ item }) => (
+        <CategoryItem
+          name={item}
+          onPress={() =>
+            navigate(ROUTE.PRODUCTOS, {
+              category: item,
+            })
+          }
+        />
+      )}
+    />
   );
 };
 
 const styles = StyleSheet.create({
   list: {
     alignItems: "center",
-    gap: 8,
+    paddingHorizontal: 10,
   },
 });

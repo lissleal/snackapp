@@ -10,7 +10,15 @@
     "splash": {
       "image": "./assets/images/logosnacks.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff",
+      "plugins": [
+        [
+          "expo-font",
+          {
+            "fonts": ["./assets/fonts/inter.ttf"]
+          }
+        ]
+      ]
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -25,7 +33,7 @@
       "bundler": "metro",
       "output": "static"
     },
-    "plugins": ["expo-router"],
+    "plugins": ["expo-router", "expo-font"],
     "experiments": {
       "typedRoutes": true
     }

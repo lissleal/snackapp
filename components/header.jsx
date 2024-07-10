@@ -14,6 +14,7 @@ export const Header = ({ icon: IconComponent, label }) => {
 const styles = StyleSheet.create({
   label: {
     fontSize: 15,
+    fontFamily: "Inter",
   },
   headerBack: {
     flexDirection: "row",

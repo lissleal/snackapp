@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   },
   texto: {
     fontSize: 20,
+    fontFamily: "Inter",
   },
 });
 
