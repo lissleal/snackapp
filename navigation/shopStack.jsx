@@ -1,9 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-// import { AllProducts } from "../screens/allProducts";
+import { ROUTE } from "./routes";
 import { Home } from "../screens/home";
 import { ItemDetail } from "../screens/itemDetail";
 import { Welcome } from "../screens/welcome";
-import { ROUTE } from "./routes";
 import { ItemListCategories } from "../screens/itemListCategories";
 
 const { Navigator: StackNavigator, Screen: StackScreen } =

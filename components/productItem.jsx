@@ -7,7 +7,7 @@ import {
   Pressable,
   useWindowDimensions,
 } from "react-native";
-import theme from "../config/theme";
+// import theme from "../config/theme";
 
 export const ProductItem = ({ name, price, description, onPress }) => {
   const { width, height } = useWindowDimensions();
