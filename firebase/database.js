@@ -1,0 +1,1 @@
+export const baseUrl = "https://snackeando-platform-default-rtdb.firebaseio.com/"

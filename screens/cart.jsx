@@ -3,19 +3,18 @@ import { View, StyleSheet, Text, Image, FlatList } from "react-native";
 import { ButtonSlide } from "../components/buttonSlide.jsx";
 import { Arrow } from "../icons/arrow.jsx";
 import { SafeAreaView } from "react-native";
-import cartData from "../data/cart.json";
 import { CartItem } from "../components/cartItem";
 import { formatPrice } from "../utils/price";
+import { useDispatch, useSelector } from "react-redux";
+import { removeItem } from "../features/cart/cartSlice.js";
 
 export const Cart = () => {
-  const [cart, setCart] = useState(cartData);
-  const totalPrice = cart.reduce(
-    (acc, { price, quantity }) => acc + price * quantity,
-    0
-  );
+  const dispatch = useDispatch();
+  const items = useSelector((state) => state.cart.value.items);
+  const total = useSelector((state) => state.cart.value.total);
 
-  const handleDelete = (id) => {
-    setCart(cart.filter((item) => item.id !== id));
+  const handleDelete = (item) => {
+    dispatch(removeItem(item));
   };
 
   const onPress = () => {
@@ -25,17 +24,17 @@ export const Cart = () => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={cart}
+        data={items}
         contentContainerStyle={styles.cartList}
         renderItem={({ item }) => (
-          <CartItem {...item} onDelete={handleDelete} />
+          <CartItem {...item} onDelete={() => handleDelete(item)} />
         )}
         ListEmptyComponent={<Text>No hay productos en el carrito</Text>}
       />
 
       <View style={styles.totalContainer}>
         <Text>Total a Pagar</Text>
-        <Text>{formatPrice(totalPrice)}</Text>
+        <Text>{formatPrice(total)}</Text>
       </View>
       <ButtonSlide onPress={onPress} icon={Arrow}>
         Ir a Pagar

@@ -4,7 +4,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { Navigator } from "../navigation/navigator";
-
+import { Provider } from "react-redux";
+import { store } from "../store";
 SplashScreen.preventAutoHideAsync();
 
 export default function Index() {
@@ -21,9 +22,10 @@ export default function Index() {
   }
 
   return (
-    <SafeAreaProvider>
-      <Navigator />
-    </SafeAreaProvider>
-
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <Navigator />
+      </SafeAreaProvider>
+    </Provider>
   );
 }

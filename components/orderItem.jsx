@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { formatPrice } from "@/utils/price.js";
 
 export const OrderItem = ({ id, userId, createdAt, items, totalPrice }) => {
   const formattedDate = new Date(createdAt).toLocaleDateString();
@@ -7,7 +8,7 @@ export const OrderItem = ({ id, userId, createdAt, items, totalPrice }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.id}>Order ID: {id}</Text>
-      <Text style={styles.total}>Total: ${totalPrice}</Text>
+      <Text style={styles.total}>Total: {formatPrice(totalPrice)}</Text>
       <Text style={styles.date}>Date: {formattedDate}</Text>
     </View>
   );
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "black",
   },
-  brand: {
+  category: {
     fontSize: 14,
     color: "black",
   },

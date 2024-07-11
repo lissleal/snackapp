@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -9,27 +9,31 @@ import {
 import { ButtonSlide } from "../components/buttonSlide.jsx";
 import { Bag } from "../icons/bag.jsx";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { ROUTE } from "../navigation/routes.js";
-
+import { useDispatch } from "react-redux";
+import { addItem } from "../features/cart/cartSlice.js";
+import { formatPrice } from "@/utils/price.js";
+//
 import products from "../data/products.json";
 
 export const ItemDetail = () => {
-  const { width, height } = useWindowDimensions();
-  const styles = createStyles(width, height);
   const { params } = useRoute();
-
-  const { navigate, setOptions } = useNavigation();
-
+  const { setOptions, goBack } = useNavigation();
+  const dispatch = useDispatch();
   const item = products.find((product) => product.id === params.productId);
   const { category, description, name, price } = item;
 
   const handleAddToCart = () => {
-    console.log("Añadido al carrito");
+    dispatch(addItem({ ...item }));
+    goBack();
   };
 
   useEffect(() => {
     setOptions({ title: name });
   }, [params.name]);
+
+  //Estilos
+  const { width, height } = useWindowDimensions();
+  const styles = createStyles(width, height);
 
   return (
     <View style={styles.container}>
@@ -42,7 +46,7 @@ export const ItemDetail = () => {
       <View style={styles.textContainer}>
         <Text style={styles.textProduct}>{name}</Text>
         <Text style={styles.textDescription}>{category}</Text>
-        <Text style={styles.textPrice}>{price}</Text>
+        <Text style={styles.textPrice}>{formatPrice(price)}</Text>
         <Text style={styles.textDescription}>{description}</Text>
       </View>
       <ButtonSlide onPress={handleAddToCart} icon={Bag}>
@@ -63,7 +67,7 @@ const createStyles = (width, heigth) =>
     },
 
     imagen: {
-      height: heigth * 0.4,
+      height: heigth * 0.3,
       width: width * 0.7,
     },
     textContainer: {
@@ -73,16 +77,16 @@ const createStyles = (width, heigth) =>
       borderRadius: 40,
     },
     textProduct: {
-      fontSize: 28,
+      fontSize: 24,
       fontWeight: "bold",
       fontFamily: "Inter",
     },
     textDescription: {
-      fontSize: 14,
+      fontSize: 13,
       fontFamily: "Inter",
     },
     textPrice: {
-      fontSize: 24,
+      fontSize: 23,
       fontFamily: "Inter",
     },
   });
