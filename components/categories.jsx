@@ -47,6 +47,6 @@ export const Categories = () => {
 const styles = StyleSheet.create({
   list: {
     alignItems: "center",
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
   },
 });

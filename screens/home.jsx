@@ -19,7 +19,7 @@ export const Home = () => {
 
 const styles = StyleSheet.create({
   safeArea: {
-    // flex: 1,
+    flex: 1,
     alignItems: "center",
     margin: 16,
   },
@@ -31,8 +31,7 @@ const styles = StyleSheet.create({
     fontFamily: "Inter",
   },
   imagen: {
-    width: 500,
-    height: 200,
-    margin: 20,
+    width: 300,
+    height: 150,
   },
 });

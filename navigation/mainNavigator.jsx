@@ -1,15 +1,35 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { Navigator } from "./navigator";
 import { AuthStack } from "./authStack.jsx";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useGetProfileImageQuery } from "../services/shopService";
+import { setUserImgProfile, setUser } from "../features/auth/authSlice";
+import { fetchSession } from "../db";
 
 export const MainNavigator = () => {
-  const user = useSelector((state) => state.auth.value.user);
-  console.log("user", user);
+  const { localId } = useSelector((state) => state.auth.value.user);
+  const { data: profileImage } = useGetProfileImageQuery(localId);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getSession = async () => {
+      const session = await fetchSession();
+      if (session) dispatch(setUser(session));
+    };
+    getSession();
+  }, []);
+
+  useEffect(() => {
+    if (profileImage) {
+      dispatch(setUserImgProfile(profileImage.image));
+    }
+  }, [profileImage]);
 
   return (
     <NavigationContainer>
-      {user && user.email ? <Navigator /> : <AuthStack />}
+      {localId ? <Navigator /> : <AuthStack />}
     </NavigationContainer>
   );
 };

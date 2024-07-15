@@ -6,7 +6,13 @@ import { useEffect } from "react";
 import { Provider } from "react-redux";
 import { store } from "../store";
 import { MainNavigator } from "../navigation/mainNavigator";
+import { init } from '../db'
+
 SplashScreen.preventAutoHideAsync();
+
+init()
+  .then(() => console.log('Database initialized'))
+  .catch(err => console.error('Database initialization failed', err))
 
 export default function Index() {
   const [loaded, error] = useFonts({

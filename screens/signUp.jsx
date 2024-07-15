@@ -18,28 +18,31 @@ export const SignUp = () => {
   const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
 
   const handleSignUp = async () => {
+    console.log("Email ingresado:", email);
+    console.log("Tipo de dato del email:", typeof email);
+
     try {
-      signupSchema.validate({
-        email,
-        password,
-        confirmPassword,
-      });
-      const payload = await triggerSignUp({ email, password });
+      await signupSchema.validate(
+        { email, password, confirmPassword },
+        { abortEarly: false }
+      );
+
+      setErrorEmail("");
+      setErrorPassword("");
+      setErrorConfirmPassword("");
+
+      const payload = await triggerSignUp({ email, password }).unwrap();
+      console.log("Usuario registrado:", payload);
+      navigate(ROUTE.LOGIN);
     } catch (error) {
       if (error.name === "ValidationError") {
-        switch (error.path) {
-          case "email":
-            setErrorEmail(error.message);
-            break;
-          case "password":
-            setErrorPassword(error.message);
-            break;
-          case "confirmPassword":
-            setErrorConfirmPassword(error.message);
-            break;
-          default:
-            break;
-        }
+        const validationErrors = {};
+        error.inner.forEach((err) => {
+          validationErrors[err.path] = err.message;
+        });
+        setErrorEmail(validationErrors.email || "");
+        setErrorPassword(validationErrors.password || "");
+        setErrorConfirmPassword(validationErrors.confirmPassword || "");
       } else {
         console.error("Error en la solicitud de registro:", error);
       }
@@ -54,7 +57,7 @@ export const SignUp = () => {
         <Input
           error={errorEmail}
           label="Correo electronico"
-          placeholder="francisco@shoooes.com"
+          placeholder="tunombre@snackeando.com"
           onChangeText={setEmail}
           value={email}
         />

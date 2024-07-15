@@ -10,7 +10,7 @@ export const Welcome = () => {
   const navigation = useNavigation();
 
   const onPress = () => {
-    navigation.navigate(ROUTE.INICIO);
+    navigation.navigate(ROUTE.TIENDA);
   };
 
   return (

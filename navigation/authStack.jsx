@@ -13,6 +13,7 @@ export const AuthStack = () => (
       //   headerBackVisible: false,
       //   headerShadowVisible: false,
       headerTitleStyle: { fontFamily: "Inter" },
+      headerShadowVisible: false,
     }}
   >
     <StackScreen

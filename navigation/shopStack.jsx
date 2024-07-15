@@ -2,8 +2,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ROUTE } from "./routes";
 import { Home } from "../screens/home";
 import { ItemDetail } from "../screens/itemDetail";
-import { Welcome } from "../screens/welcome";
 import { ItemListCategories } from "../screens/itemListCategories";
+import { Welcome } from "../screens/welcome";
 
 const { Navigator: StackNavigator, Screen: StackScreen } =
   createNativeStackNavigator();
@@ -18,12 +18,14 @@ export const ShopStack = () => (
     <StackScreen
       name={ROUTE.BIENVENIDOS}
       component={Welcome}
-      options={{ headerShown: false }}
+      options={{
+        headerTitle: "Bienvenido",
+      }}
     />
     <StackScreen
-      name={ROUTE.INICIO}
+      name={ROUTE.TIENDA}
       component={Home}
-      options={{ headerTitle: "Inicio" }}
+      options={{ headerTitle: "Tienda" }}
     />
     <StackScreen name={ROUTE.PRODUCTOS} component={ItemListCategories} />
     <StackScreen name={ROUTE.PRODUCTO} component={ItemDetail} />
