@@ -1,37 +1,41 @@
 import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-/* import orderData from '../data/orders.json' */
 import { OrderItem } from "../components/orderItem";
-import dataOrders from "../data/orders.json";
-// import { Theme } from "../config/theme";
-// import { useSelector } from "react-redux";
-// import { useGetOrdersByUserQuery } from "../services/shopServices";
+import { useSelector } from "react-redux";
+import { useGetOrdersByUserQuery } from "../services/shopService";
 
 export const Orders = () => {
-  //   const user = useSelector((state) => state.auth.value.user);
-  //   console.log("Current user:", user);
-  //   const {
-  //     data: orders,
-  //     error,
-  //     isLoading,
-  //   } = useGetOrdersByUserQuery(user.localId);
-  //   console.log("Orders data:", orders);
+  const user = useSelector((state) => state.auth.value.user);
+  console.log("Current user:", user.localId);
 
-  //   if (isLoading) {
-  //     return <Text>Cargando ordenes...</Text>;
-  //   }
-  //   if (error) {
-  //     return <Text>Error al cargar ordenes!</Text>;
-  //   }
+  const {
+    data: orders,
+    error,
+    isLoading,
+  } = useGetOrdersByUserQuery(user.localId);
+  console.log("Orders data:", orders);
+  console.log(orders.items);
 
-  //   const ordersArray = orders ? Object.values(orders) : [];
+  if (isLoading) {
+    return <Text>Cargando ordenes...</Text>;
+  }
+  if (error) {
+    console.error("Error al cargar órdenes:", error);
+    return <Text>Error al cargar órdenes</Text>;
+  }
+
+  const ordersArray = orders ? Object.values(orders) : [];
+  console.log("Orders array:", ordersArray);
 
   return (
     <View style={styles.container}>
       <FlatList
         contentContainerStyle={styles.list}
-        data={dataOrders}
-        renderItem={({ item }) => <OrderItem {...item} />}
+        data={ordersArray}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <OrderItem createdAt={item.date} totalPrice={item.total} />
+        )}
         ListEmptyComponent={<Text>No hay ordenes</Text>}
       />
     </View>

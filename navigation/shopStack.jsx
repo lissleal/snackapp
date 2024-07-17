@@ -19,7 +19,7 @@ export const ShopStack = () => (
       name={ROUTE.BIENVENIDOS}
       component={Welcome}
       options={{
-        headerTitle: "Bienvenido",
+        headerShown: false,
       }}
     />
     <StackScreen
