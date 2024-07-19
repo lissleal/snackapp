@@ -47,11 +47,10 @@ export const ImageSelector = () => {
       setIsSavingProfileImage(true);
       dispatch(setCameraImg(image));
       const result = await triggerSaveProfileImage({ image, localId });
-      console.log(result);
       dispatch(setUserImgProfile(image));
       goBack();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setIsSavingProfileImage(false);
     }

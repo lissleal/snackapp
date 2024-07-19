@@ -51,7 +51,6 @@ export const Login = () => {
   useEffect(() => {
     if (result.data) {
       const { email, localId, idToken: token } = result.data;
-      console.log("token =>", token);
 
       dispatch(setUser({ email, localId, token }));
       insertSession({ email, localId, token });

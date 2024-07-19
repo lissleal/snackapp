@@ -18,9 +18,6 @@ export const SignUp = () => {
   const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
 
   const handleSignUp = async () => {
-    console.log("Email ingresado:", email);
-    console.log("Tipo de dato del email:", typeof email);
-
     try {
       await signupSchema.validate(
         { email, password, confirmPassword },
@@ -32,7 +29,6 @@ export const SignUp = () => {
       setErrorConfirmPassword("");
 
       const payload = await triggerSignUp({ email, password }).unwrap();
-      console.log("Usuario registrado:", payload);
       navigate(ROUTE.LOGIN);
     } catch (error) {
       if (error.name === "ValidationError") {

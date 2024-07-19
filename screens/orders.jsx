@@ -6,15 +6,12 @@ import { useGetOrdersByUserQuery } from "../services/shopService";
 
 export const Orders = () => {
   const user = useSelector((state) => state.auth.value.user);
-  console.log("Current user:", user.localId);
 
   const {
     data: orders,
     error,
     isLoading,
   } = useGetOrdersByUserQuery(user.localId);
-  console.log("Orders data:", orders);
-  console.log(orders.items);
 
   if (isLoading) {
     return <Text>Cargando ordenes...</Text>;
@@ -25,7 +22,6 @@ export const Orders = () => {
   }
 
   const ordersArray = orders ? Object.values(orders) : [];
-  console.log("Orders array:", ordersArray);
 
   return (
     <View style={styles.container}>
