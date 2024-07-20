@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, Image, FlatList, Alert } from "react-native";
+import { View, StyleSheet, Text, FlatList, Alert } from "react-native";
 import { ButtonSlide } from "../components/buttonSlide.jsx";
 import { Arrow } from "../icons/arrow.jsx";
 import { SafeAreaView } from "react-native";
@@ -9,13 +9,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearCart, removeItem } from "../features/cart/cartSlice.js";
 import { usePostOrderMutation } from "../services/shopService.js";
 import { theme } from "../config/theme.js";
+import { useGetOrdersByUserQuery } from "../services/shopService.js";
+import { useNavigation } from "@react-navigation/native";
 
 export const Cart = () => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.cart.value.items);
   const total = useSelector((state) => state.cart.value.total);
   const user = useSelector((state) => state.auth.value.user);
-  const [triggerPost, { isSuccess, isError, error }] = usePostOrderMutation();
+  const userMail = user.email;
+  const [triggerPost, { isSuccess, isError, error }] =
+    usePostOrderMutation(userMail);
+  const { data: orders, refetch } = useGetOrdersByUserQuery(user.localId);
   const cartIsEmpty = items.length === 0;
 
   const handleDelete = (item) => {
@@ -23,13 +28,22 @@ export const Cart = () => {
   };
 
   const confirmOrder = () => {
-    triggerPost({ items, total, user });
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    const today = new Date();
+    const todayFormatted = today.toLocaleDateString("es-CL", options);
+    triggerPost({ items, total, user, date: todayFormatted });
   };
 
   useEffect(() => {
     if (isSuccess) {
       Alert.alert("Éxito", "Orden creada exitosamente");
       dispatch(clearCart());
+      refetch();
     }
     if (isError) {
       Alert.alert(
@@ -37,7 +51,7 @@ export const Cart = () => {
         error?.data?.message || "Hubo un error al crear la orden"
       );
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, refetch]);
 
   return (
     <SafeAreaView style={styles.cart}>

@@ -22,16 +22,20 @@ export const Orders = () => {
     return <Text>Error al cargar órdenes</Text>;
   }
 
-  const ordersArray = orders ? Object.values(orders) : [];
+  const ordersArray = orders || [];
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.orders}>
       <FlatList
-        contentContainerStyle={styles.list}
+        contentContainerStyle={styles.orderList}
         data={ordersArray}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <OrderItem createdAt={item.date} totalPrice={item.total} />
+          <OrderItem
+            createdAt={item.date}
+            totalPrice={item.total}
+            id={item.id}
+          />
         )}
         ListEmptyComponent={<Text>No hay ordenes</Text>}
       />
@@ -40,13 +44,14 @@ export const Orders = () => {
 };
 
 export const styles = StyleSheet.create({
-  container: {
-    backgroundColor: theme.colors.white,
+  orders: {
     flex: 1,
+    padding: 16,
+    gap: 10,
+    justifyContent: "space around",
+    backgroundColor: theme.colors.white,
   },
-  list: {
-    gap: 32,
-    marginTop: 8,
-    marginHorizontal: 8,
+  orderList: {
+    gap: 10,
   },
 });
