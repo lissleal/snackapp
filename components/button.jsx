@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text } from "react-native";
-// import { theme } from "../configs/theme";
+import { theme } from "../config/theme";
 
 export const Button = ({ children, onPress }) => (
   <Pressable onPress={onPress} style={styles.button}>
@@ -9,7 +9,7 @@ export const Button = ({ children, onPress }) => (
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "orange",
+    backgroundColor: theme.colors.primary[400],
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 8,

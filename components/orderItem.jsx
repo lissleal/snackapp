@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { formatPrice } from "@/utils/price.js";
+import { theme } from "../config/theme";
 
 export const OrderItem = ({ id, userId, createdAt, items, totalPrice }) => {
   const formattedDate = new Date(createdAt).toLocaleDateString();
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 3,
-    backgroundColor: "#ffffff",
+    backgroundColor: theme.colors.white,
   },
   id: {
     fontSize: 16,

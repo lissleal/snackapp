@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text, TextInput } from "react-native";
 import { Search } from "../icons/search";
+import { theme } from "../config/theme";
 
 export const SearchInput = (props) => {
   return (
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     alignItems: "center",
     justifyContent: "space-between",
-    borderBlockColor: "#D3B398",
+    borderBlockColor: theme.colors.primary[400],
     borderWidth: 2,
     borderRadius: 50,
   },

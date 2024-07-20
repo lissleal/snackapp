@@ -8,6 +8,7 @@ import { formatPrice } from "../utils/price";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart, removeItem } from "../features/cart/cartSlice.js";
 import { usePostOrderMutation } from "../services/shopService.js";
+import { theme } from "../config/theme.js";
 
 export const Cart = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ export const Cart = () => {
   }, [isSuccess, isError]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.cart}>
       <FlatList
         data={items}
         contentContainerStyle={styles.cartList}
@@ -49,33 +50,45 @@ export const Cart = () => {
         ListEmptyComponent={<Text>No hay productos en el carrito</Text>}
       />
       <View style={styles.totalContainer}>
-        <Text>Total a Pagar</Text>
-        <Text>{formatPrice(total)}</Text>
+        <Text style={styles.textTotal}>
+          Total a Pagar: {formatPrice(total)}
+        </Text>
       </View>
-      {!cartIsEmpty ? (
-        <ButtonSlide onPress={confirmOrder} icon={Arrow}>
-          Ir a Pagar
-        </ButtonSlide>
-      ) : null}
+
+      <View style={styles.bottomContainer}>
+        {!cartIsEmpty ? (
+          <ButtonSlide onPress={confirmOrder} icon={Arrow}>
+            Ir a Pagar
+          </ButtonSlide>
+        ) : null}
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  cart: {
     flex: 1,
     padding: 16,
     gap: 10,
     justifyContent: "space around",
-    backgroundColor: "#D3B398",
+    backgroundColor: theme.colors.white,
   },
   totalContainer: {
-    borderColor: "white",
-    borderWidth: 2,
-    borderRadius: 20,
+    backgroundColor: theme.colors.primary[400],
+    borderRadius: 10,
     padding: 15,
+  },
+  textTotal: {
+    color: theme.colors.white,
+    fontSize: 20,
+    textAlign: "center",
   },
   cartList: {
     gap: 10,
+  },
+  bottomContainer: {
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

@@ -1,4 +1,5 @@
 import { Pressable, Text, StyleSheet } from "react-native";
+import { theme } from "../config/theme";
 
 export const CategoryItem = ({ name, onPress }) => {
   return (
@@ -10,17 +11,17 @@ export const CategoryItem = ({ name, onPress }) => {
 
 const styles = StyleSheet.create({
   category: {
-    backgroundColor: "#F7F6F9",
+    backgroundColor: theme.colors.primary[300],
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 38,
-    paddingHorizontal: 10,
-    height: 33,
-    marginHorizontal: 5,
+    borderRadius: 10,
+    height: 40,
+    width: 300,
+    marginHorizontal: 10,
   },
   text: {
-    fontSize: 13,
+    fontSize: 14,
     fontFamily: "Inter",
-    color: "#505050",
+    color: theme.colors.white,
   },
 });

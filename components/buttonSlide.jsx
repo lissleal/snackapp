@@ -1,12 +1,13 @@
 import React from "react";
 import { Pressable, Text, StyleSheet, View } from "react-native";
+import { theme } from "../config/theme";
 
 export const ButtonSlide = ({ onPress, icon: IconComponent, children }) => {
   return (
     <Pressable style={styles.botonDeslizante} onPress={onPress}>
       <Text style={styles.texto}>{children}</Text>
       {IconComponent && (
-        <View style={[styles.iconContainer, { backgroundColor: "#D3B398" }]}>
+        <View style={styles.iconContainer}>
           <IconComponent />
         </View>
       )}
@@ -24,11 +25,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
+    borderWidth: 2,
+    borderColor: theme.colors.primary[300],
   },
   iconContainer: {
     width: 80,
     height: 45,
-    backgroundColor: "#D3B398", // Color de fondo del contenedor del icono
+    backgroundColor: theme.colors.primary[300],
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",

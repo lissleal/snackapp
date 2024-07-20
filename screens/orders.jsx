@@ -1,8 +1,9 @@
 import React from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { OrderItem } from "../components/orderItem";
 import { useSelector } from "react-redux";
 import { useGetOrdersByUserQuery } from "../services/shopService";
+import { theme } from "../config/theme";
 
 export const Orders = () => {
   const user = useSelector((state) => state.auth.value.user);
@@ -24,7 +25,7 @@ export const Orders = () => {
   const ordersArray = orders ? Object.values(orders) : [];
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         contentContainerStyle={styles.list}
         data={ordersArray}
@@ -34,13 +35,14 @@ export const Orders = () => {
         )}
         ListEmptyComponent={<Text>No hay ordenes</Text>}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f9f9f9",
+    backgroundColor: theme.colors.white,
+    flex: 1,
   },
   list: {
     gap: 32,

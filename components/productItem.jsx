@@ -7,7 +7,8 @@ import {
   Pressable,
   useWindowDimensions,
 } from "react-native";
-// import theme from "../config/theme";
+import { theme } from "../config/theme.js";
+import { formatPrice } from "../utils/price.js";
 
 export const ProductItem = ({ name, price, description, onPress }) => {
   const { width, height } = useWindowDimensions();
@@ -16,14 +17,12 @@ export const ProductItem = ({ name, price, description, onPress }) => {
     <Pressable style={styles.productItem} onPress={onPress}>
       <Image
         style={styles.imagen}
-        source={{
-          uri: "https://snackclub.cl/wp-content/uploads/2024/02/ERES-LO-QUE-COMES.-NO-SEAS-RAPIDO-FACIL-O-ARTIFICIAL-1500-x-1500-px-1500-x-1500-px-97.png",
-        }}
+        source={require("../assets/images/papasybebida.png")}
       />
       <View style={styles.textContainer}>
         <Text style={styles.textProduct}>{name}</Text>
         <Text style={styles.textDescription}>{description}</Text>
-        <Text style={styles.textPrice}>{price}</Text>
+        <Text>Precio: {formatPrice(price)}</Text>
       </View>
     </Pressable>
   );
@@ -35,17 +34,17 @@ const createStyles = (width) =>
       flexDirection: "row",
       alignContent: "center",
       alignItems: "center",
-      height: 120,
-      borderWidth: 1,
-      borderColor: "#D3B398",
+      height: 110,
+      borderWidth: 2,
+      borderColor: theme.colors.primary[400],
       borderRadius: 20,
-      padding: 10,
+      paddingHorizontal: 10,
+      gap: 10,
     },
     textContainer: {
       flex: 2,
       alignItems: "flex-start",
       justifyContent: "center",
-      padding: 10,
     },
     textProduct: {
       fontSize: 15,
@@ -57,8 +56,7 @@ const createStyles = (width) =>
       fontFamily: "Inter",
     },
     imagen: {
-      height: 110,
-      width: 110,
-      flex: 1,
+      height: 100,
+      width: 100,
     },
   });

@@ -12,6 +12,7 @@ import { ROUTE } from "../navigation/routes";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategorySelected } from "../features/shop/shopSlice.js";
 import { useGetCategoriesQuery } from "../services/shopService.js";
+import { theme } from "../config/theme.js";
 
 export const Categories = () => {
   const { navigate } = useNavigation();
@@ -46,7 +47,8 @@ export const Categories = () => {
 
 const styles = StyleSheet.create({
   list: {
-    alignItems: "center",
     paddingHorizontal: 20,
+    gap: 5,
+    width: "100%",
   },
 });

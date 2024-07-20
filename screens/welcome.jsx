@@ -5,6 +5,7 @@ import { ButtonSlide } from "../components/buttonSlide.jsx";
 import { Arrow2 } from "../icons/arrow2.jsx";
 import { useNavigation } from "@react-navigation/native";
 import { ROUTE } from "../navigation/routes.js";
+import { theme } from "../config/theme.js";
 
 export const Welcome = () => {
   const navigation = useNavigation();
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
   safeArea: {
     width: "100%",
     height: "100%",
-    backgroundColor: "#D3B398",
+    backgroundColor: theme.colors.primary[300],
   },
   titleContainer: {
     flex: 1,
@@ -64,12 +65,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     fontFamily: "Inter",
-    color: "#D3B398",
+    color: theme.colors.primary[500],
     fontStyle: "italic",
   },
   subtitle: {
     fontSize: 20,
-    color: "#38434D",
+    color: theme.colors.gray[900],
     fontFamily: "Inter",
   },
   imagen: {

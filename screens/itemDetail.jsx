@@ -5,6 +5,8 @@ import {
   Text,
   Image,
   useWindowDimensions,
+  SafeAreaView,
+  Alert,
 } from "react-native";
 import { ButtonSlide } from "../components/buttonSlide.jsx";
 import { Bag } from "../icons/bag.jsx";
@@ -12,7 +14,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { addItem } from "../features/cart/cartSlice.js";
 import { formatPrice } from "@/utils/price.js";
-//
+import { theme } from "../config/theme.js";
 import products from "../data/products.json";
 
 export const ItemDetail = () => {
@@ -24,7 +26,9 @@ export const ItemDetail = () => {
 
   const handleAddToCart = () => {
     dispatch(addItem({ ...item }));
-    goBack();
+    Alert.alert("Producto añadido", `${name} ha sido añadido al carrito`, [
+      { text: "OK", onPress: () => goBack() },
+    ]);
   };
 
   useEffect(() => {
@@ -36,34 +40,32 @@ export const ItemDetail = () => {
   const styles = createStyles(width, height);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Image
         style={styles.imagen}
-        source={{
-          uri: "https://snackclub.cl/wp-content/uploads/2024/02/ERES-LO-QUE-COMES.-NO-SEAS-RAPIDO-FACIL-O-ARTIFICIAL-1500-x-1500-px-1500-x-1500-px-97.png",
-        }}
-      ></Image>
+        source={require("../assets/images/papasybebida.png")}
+      />
       <View style={styles.textContainer}>
         <Text style={styles.textProduct}>{name}</Text>
-        <Text style={styles.textDescription}>{category}</Text>
-        <Text style={styles.textPrice}>{formatPrice(price)}</Text>
+        <Text style={styles.textDescription}>Categoría: {category}</Text>
+        <Text style={styles.textPrice}>Precio: {formatPrice(price)}</Text>
         <Text style={styles.textDescription}>{description}</Text>
       </View>
       <ButtonSlide onPress={handleAddToCart} icon={Bag}>
         Añadir al carrito
       </ButtonSlide>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const createStyles = (width, heigth) =>
   StyleSheet.create({
     container: {
-      width: width,
-      height: heigth,
-      padding: 20,
-      gap: 10,
+      flex: 1,
+      paddingHorizontal: 20,
       alignItems: "center",
+      justifyContent: "space-around",
+      backgroundColor: theme.colors.white,
     },
 
     imagen: {
@@ -71,22 +73,25 @@ const createStyles = (width, heigth) =>
       width: width * 0.7,
     },
     textContainer: {
-      backgroundColor: "#D3B398",
-      gap: 5,
+      backgroundColor: theme.colors.primary[300],
+      gap: 10,
       padding: 20,
-      borderRadius: 40,
+      borderRadius: 20,
     },
     textProduct: {
-      fontSize: 24,
+      fontSize: 20,
       fontWeight: "bold",
       fontFamily: "Inter",
+      color: theme.colors.gray[800],
     },
     textDescription: {
       fontSize: 13,
       fontFamily: "Inter",
+      color: theme.colors.primary[800],
     },
     textPrice: {
-      fontSize: 23,
+      fontSize: 13,
       fontFamily: "Inter",
+      color: theme.colors.primary[800],
     },
   });

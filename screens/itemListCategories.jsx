@@ -14,6 +14,7 @@ import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { ROUTE } from "../navigation/routes";
 import { useSelector } from "react-redux";
 import { useGetProductsByCategoryQuery } from "../services/shopService";
+import { theme } from "../config/theme";
 
 export const ItemListCategories = () => {
   const { navigate, setOptions } = useNavigation();
@@ -55,7 +56,7 @@ export const ItemListCategories = () => {
   if (isLoading) {
     return (
       <View style={styles.itemListCategories}>
-        <ActivityIndicator size="large" color="orange" />
+        <ActivityIndicator size="large" color={theme.colors.primary[400]} />
         <Text>Cargando productos...</Text>
       </View>
     );
@@ -111,6 +112,7 @@ const createStyles = (width, height) =>
       width: width,
       height: height,
       gap: 10,
+      backgroundColor: theme.colors.white,
     },
     header: {
       flex: 1,
