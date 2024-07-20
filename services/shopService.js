@@ -26,7 +26,7 @@ export const shopApi = createApi({
             query: localId => `orders.json?orderBy="user/localId"&equalTo="${localId}"`,
             transformResponse: response => {
                 if (!response) return [];
-                return Object.values(response);
+                return Object.keys(response).map(id => ({ id, ...response[id] }));
             }
         }),
         getProfileImage: builder.query({
